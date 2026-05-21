@@ -1,0 +1,110 @@
+@prefix ex: <http://webdev.id/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+############################
+# CLASSES
+############################
+
+ex:Technology a owl:Class .
+
+ex:Framework a owl:Class ;
+    rdfs:subClassOf ex:Technology .
+
+ex:Library a owl:Class ;
+    rdfs:subClassOf ex:Technology .
+
+ex:ORM a owl:Class ;
+    rdfs:subClassOf ex:Technology .
+
+ex:Database a owl:Class ;
+    rdfs:subClassOf ex:Technology .
+
+ex:Language a owl:Class ;
+    rdfs:subClassOf ex:Technology .
+
+############################
+# OBJECT PROPERTIES
+############################
+
+ex:isFrameworkOf a owl:ObjectProperty ;
+    rdfs:domain ex:Framework ;
+    rdfs:range ex:Library .
+
+ex:isORMFor a owl:ObjectProperty ;
+    rdfs:domain ex:ORM ;
+    rdfs:range ex:Database .
+
+ex:compatibleWith a owl:ObjectProperty ;
+    rdfs:domain ex:Technology ;
+    rdfs:range ex:Technology .
+
+ex:usesLanguage a owl:ObjectProperty ;
+    rdfs:domain ex:Technology ;
+    rdfs:range ex:Language .
+
+############################
+# FRAMEWORKS
+############################
+
+ex:NextJS a ex:Framework ;
+    ex:isFrameworkOf ex:React ;
+    ex:usesLanguage ex:TypeScript ;
+    ex:compatibleWith ex:TailwindCSS ;
+    ex:compatibleWith ex:Prisma .
+
+ex:NuxtJS a ex:Framework ;
+    ex:isFrameworkOf ex:VueJS ;
+    ex:usesLanguage ex:TypeScript .
+
+############################
+# LIBRARIES
+############################
+
+ex:React a ex:Library ;
+    ex:usesLanguage ex:JavaScript .
+
+ex:VueJS a ex:Library ;
+    ex:usesLanguage ex:JavaScript .
+
+ex:TailwindCSS a ex:Library .
+
+############################
+# ORM
+############################
+
+ex:Prisma a ex:ORM ;
+    ex:isORMFor ex:PostgreSQL ;
+    ex:isORMFor ex:MySQL ;
+    ex:isORMFor ex:MongoDB ;
+    ex:compatibleWith ex:NextJS ;
+    ex:usesLanguage ex:TypeScript .
+
+ex:Sequelize a ex:ORM ;
+    ex:isORMFor ex:PostgreSQL ;
+    ex:isORMFor ex:MySQL ;
+    ex:usesLanguage ex:JavaScript .
+
+ex:TypeORM a ex:ORM ;
+    ex:isORMFor ex:PostgreSQL ;
+    ex:isORMFor ex:MySQL ;
+    ex:usesLanguage ex:TypeScript .
+
+############################
+# DATABASES
+############################
+
+ex:PostgreSQL a ex:Database .
+
+ex:MySQL a ex:Database .
+
+ex:MongoDB a ex:Database .
+
+############################
+# LANGUAGES
+############################
+
+ex:JavaScript a ex:Language .
+
+ex:TypeScript a ex:Language .
